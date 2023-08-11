@@ -1,9 +1,8 @@
+import Main from "./components/Main";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function App() {
-  return (
-    <div className="App">
-      <h1>Let's startttt</h1>
-    </div>
-  );
+  return <Main />;
 }
 
 export default App;
