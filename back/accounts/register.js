@@ -19,12 +19,12 @@ const addUser = async (req, res) => {
       .json({ password: "the field is not between 8 and 32 characters" });
     return;
   }
-  if (username.length < 7) {
-    res
-      .status(404)
-      .json({ username: "the field is not between 8 and 32 characters" });
-    return;
-  }
+  // if (username.length < 1) {
+  //   res
+  //     .status(404)
+  //     .json({ username: "the field is not between 8 and 32 characters" });
+  //   return;
+  // }
 
   const hash = bcrypt.hashSync(password, saltRounds);
 

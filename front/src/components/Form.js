@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal, Button, Container, ModalBody } from "react-bootstrap";
-
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
+import axios from "axios";
+
 export default function Formular(props) {
+  const SinUp = (mail, username, password) => {
+    axios
+      .post("http://localhost:5000/user/register", {
+        username: username,
+        mail: mail,
+        password: password,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   if (props.form === "logIn") {
     return (
       <Modal
@@ -103,10 +119,11 @@ export default function Formular(props) {
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
+              SinUp(values.email, values.name, values.password);
+              // setTimeout(() => {
+              //   alert(JSON.stringify(values, null, 2));
+              //   setSubmitting(false);
+              // }, 400);
             }}
           >
             {({ isSubmitting }) => (
