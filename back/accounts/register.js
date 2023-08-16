@@ -4,7 +4,7 @@ const saltRounds = 10;
 
 const addUser = async (req, res) => {
   const { username, mail, password } = req.body;
-  const regex_email = /^[a-zA-Z0-9._~-]+@stud.acs.upb.ro$/;
+  const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   if (!regex_email.test(mail)) {
     res.status(404).json({
@@ -19,17 +19,11 @@ const addUser = async (req, res) => {
       .json({ password: "the field is not between 8 and 32 characters" });
     return;
   }
-  // if (username.length < 1) {
-  //   res
-  //     .status(404)
-  //     .json({ username: "the field is not between 8 and 32 characters" });
-  //   return;
-  // }
 
   const hash = bcrypt.hashSync(password, saltRounds);
 
   try {
-    const user = await User.create({ username, mail, password });
+    const user = await User.create({ username, mail, password: hash });
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });

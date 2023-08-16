@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { Modal, Button, Container, ModalBody } from "react-bootstrap";
+import React from "react";
+import { Modal, Button, ModalBody } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import axios from "axios";
 
 export default function Formular(props) {
-  const SinUp = (mail, username, password) => {
+  const SingUp = (mail, username, password) => {
     axios
       .post("http://localhost:5000/user/register", {
         username: username,
@@ -16,6 +16,21 @@ export default function Formular(props) {
         console.log(res.data);
       })
       .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const LogIn = (username, password) => {
+    axios
+      .post("http://localhost:5000/user/login", {
+        username: username,
+        password: password,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log("plm");
         console.log(e);
       });
   };
@@ -34,15 +49,11 @@ export default function Formular(props) {
 
         <ModalBody className="d-flex justify-content-center align-items-center">
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ username: "", password: "" }}
             validate={(values) => {
               const errors = {};
-              if (!values.email) {
-                errors.email = "Required";
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-              ) {
-                errors.email = "Invalid email address";
+              if (!values.username) {
+                errors.username = "Required";
               }
               if (!values.password) {
                 errors.password = "Required";
@@ -51,18 +62,19 @@ export default function Formular(props) {
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
+              LogIn(values.username, values.password);
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
+                // alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
               }, 400);
             }}
           >
             {({ isSubmitting }) => (
               <Form className="d-flex flex-column ">
-                <label htmlFor="email">Email</label>
-                <Field type="email" name="email" className="mb-3" />
+                <label htmlFor="email">Name</label>
+                <Field type="username" name="username" className="mb-3" />
                 <ErrorMessage
-                  name="email"
+                  name="username"
                   component="span"
                   className="mb-3 bg-danger align-self-center p-2 rounded"
                 />
@@ -119,11 +131,11 @@ export default function Formular(props) {
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
-              SinUp(values.email, values.name, values.password);
-              // setTimeout(() => {
-              //   alert(JSON.stringify(values, null, 2));
-              //   setSubmitting(false);
-              // }, 400);
+              SingUp(values.email, values.name, values.password);
+              setTimeout(() => {
+                //   alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
             }}
           >
             {({ isSubmitting }) => (

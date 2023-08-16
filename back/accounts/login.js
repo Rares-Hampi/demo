@@ -5,10 +5,12 @@ require("dotenv").config();
 
 const login = async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ username });
   let auth;
 
+  const user = await User.findOne({ username: username });
+
   if (!user) {
+    console.log("nush ba");
     return res.status(400).json({
       err: "Nu am gasit userul dorit",
     });
@@ -21,7 +23,7 @@ const login = async (req, res) => {
     return res.status(400).json({ err: "Parola este incorecta" });
   }
 
-  const token = await jwt.sign(
+  const token = jwt.sign(
     { username: user, id: user.id },
     process.env.PRIVATE_KEY
   );
