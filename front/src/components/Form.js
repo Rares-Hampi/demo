@@ -14,6 +14,7 @@ export default function Formular(props) {
       })
       .then((res) => {
         console.log(res.data);
+        props.action();
       })
       .catch((e) => {
         console.log(e);
@@ -28,9 +29,10 @@ export default function Formular(props) {
       })
       .then((res) => {
         console.log(res.data);
+        localStorage.setItem("jwt", res.data);
+        props.action();
       })
       .catch((e) => {
-        console.log("plm");
         console.log(e);
       });
   };
