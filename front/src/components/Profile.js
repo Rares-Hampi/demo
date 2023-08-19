@@ -5,10 +5,8 @@ import axios from "axios";
 
 export default function Profile() {
   const [user, setUser] = useState();
-
   const state = useLocation();
   const id = state.state;
-  console.log(id);
 
   useEffect(() => {
     axios
@@ -16,13 +14,15 @@ export default function Profile() {
         params: { id: id },
       })
       .then((res) => {
-        console.log(res.data);
-        setUser();
+        setUser({ name: res.data.username, email: res.data.mail });
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, [id]);
+
+  console.log(user);
+
   return (
     <>
       <Menu />
