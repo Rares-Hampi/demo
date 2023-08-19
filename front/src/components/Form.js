@@ -1,10 +1,13 @@
 import React from "react";
 import { Modal, Button, ModalBody } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
 import axios from "axios";
+import { useNavigate } from "react-router";
+import jwt_decode from "jwt-decode";
 
 export default function Formular(props) {
+  let navigate = useNavigate();
+
   const SingUp = (mail, username, password) => {
     axios
       .post("http://localhost:5000/user/register", {
@@ -13,8 +16,9 @@ export default function Formular(props) {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
+        localStorage.setItem("jwt", res.data);
         props.action();
+        navigate("/user", { state: res.data._id });
       })
       .catch((e) => {
         console.log(e);
@@ -28,9 +32,10 @@ export default function Formular(props) {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem("jwt", res.data);
         props.action();
+        console.log(jwt_decode(res.data).id);
+        navigate("/user", { state: jwt_decode(res.data).id });
       })
       .catch((e) => {
         console.log(e);

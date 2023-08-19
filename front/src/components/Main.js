@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Menu from "./Menu";
 import Form from "./Form";
 
@@ -15,7 +16,7 @@ export default function Main() {
     setShow(true);
     setForm("singUp");
   };
-  const hideModal = () => {
+  const HideModal = () => {
     setShow(false);
   };
 
@@ -25,9 +26,9 @@ export default function Main() {
       <h1 className="text-sm-center position-absolute top-50 start-50 translate-middle w-50 p-3">
         Salutari. Imi pare super bine ca ne-am cunoscut si ca doriti sa ma
         ajuati in realizarea acestui proiect. Acum gata cu introducerile si sa
-        trecem la treaba. Exitsa o vorba, "La munca, nu la intins mana".
+        trecem la treaba. Exitsa o vorba: <br /> "La munca, nu la intins mana".
       </h1>
-      <Form show={show} action={hideModal} form={form} />
+      <Form show={show} action={HideModal} form={form} />
     </>
   );
 }

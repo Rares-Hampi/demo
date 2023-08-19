@@ -27,8 +27,8 @@ const login = async (req, res) => {
     { username: user, id: user.id },
     process.env.PRIVATE_KEY
   );
+
   res.send(token);
-  res.status(200).json({ msg: "Userul a fost autentificat cu succes" });
 };
 
 module.exports = {

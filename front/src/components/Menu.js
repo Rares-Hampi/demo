@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function Menu(props) {
   const [hide, setHide] = useState(false);
   let jwt = localStorage.getItem("jwt");
+  let navigate = useNavigate();
 
   useEffect(() => {
-    jwt !== undefined ? setHide(true) : setHide(false);
-    // if (jwt) {
-    //   setHide(true);
-    // } else {
-    //   setHide(fa);
-    // }
+    jwt !== null ? setHide(true) : setHide(false);
   }, [jwt]);
 
   const logOut = () => {
     localStorage.removeItem("jwt");
     setHide(false);
+    navigate("/");
   };
 
   return (
@@ -44,7 +42,7 @@ export default function Menu(props) {
               </Nav.Link>
               <Nav.Link
                 eventKey={2}
-                className="text-light fs-4 ms-5"
+                className="text-light fs-4"
                 onClick={props.singUp}
               >
                 Sing up
