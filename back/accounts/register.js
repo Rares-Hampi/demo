@@ -8,8 +8,7 @@ const addUser = async (req, res) => {
 
   if (!regex_email.test(mail)) {
     res.status(404).json({
-      email:
-        "the field must be a valid email,the field must end in @stud.acs.upb.ro",
+      email: "the field must be a valid email,the field must end in @gmail.com",
     });
     return;
   }
