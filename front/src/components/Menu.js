@@ -18,6 +18,10 @@ export default function Menu(props) {
     navigate("/");
   };
 
+  const showAllUsers = () => {
+    navigate("/allUsers");
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-black">
       <Container>
@@ -31,9 +35,10 @@ export default function Menu(props) {
         >
           {hide === true ? (
             <Nav className="d-flex justify-content-around">
-              <Link className="text-light fs-4" to="/" onClick={logOut}>
+              <Link className="text-light fs-4 px-1" to="/" onClick={logOut}>
                 Log out
               </Link>
+              <Link className="text-light fs-4 px-1" to="/allUsers" onClick={showAllUsers}>Show all users</Link>
             </Nav>
           ) : (
             <Nav className="d-flex justify-content-around">
@@ -45,7 +50,7 @@ export default function Menu(props) {
                 className="text-light fs-4"
                 onClick={props.singUp}
               >
-                Sing up
+                Sign up
               </Nav.Link>
             </Nav>
           )}

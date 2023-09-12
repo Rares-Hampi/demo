@@ -1,7 +1,14 @@
 const User = require("../models/userSchema");
 const mongoose = require("mongoose");
 
-const getUsers = async (req, res) => {};
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json(users);  
+  } catch (err) {
+    res.status(400).json({ err: err.message})
+  }
+};
 
 const getUser = async (req, res) => {
   const { id } = req.params;
