@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from "./components/Profile";
-
+import Users from "./components/Users"
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +15,10 @@ const routes = createBrowserRouter([
   {
     path: "/user",
     element: <Profile />,
+  },
+  {
+    path:"/allUsers",
+    element: <Users />,
   },
 ]);
 

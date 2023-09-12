@@ -1,7 +1,16 @@
 const User = require("../models/userSchema");
 const mongoose = require("mongoose");
 
-const getUsers = async (req, res) => {};
+const getUsers = async (req, res) => {
+  try{
+      User.find()
+      .then(users =>{
+        res.json(users);
+      })
+    }catch( err){
+      res.status(404).json({ err: "Nu am gasit userul dorit" });
+    }
+};
 
 const getUser = async (req, res) => {
   const { id } = req.params;
@@ -47,7 +56,7 @@ const updateUser = async (req, res) => {
   if (!user) {
     return res.status(400).json({ err: "Nu am gasit userul dorit" });
   }
-
+  console.log(user)
   res.status(200).json(user);
 };
 

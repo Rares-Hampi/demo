@@ -9,7 +9,7 @@ const {
 const { login } = require("../accounts/login");
 const { addUser } = require("../accounts/register");
 
-router.get("/", getUsers);
+router.get("/allUsers", getUsers);
 router.get("/:id", getUser);
 router.post("/register", addUser);
 router.delete("/delete/:id", deleteUser);

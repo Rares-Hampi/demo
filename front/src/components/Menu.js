@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
@@ -33,6 +33,9 @@ export default function Menu(props) {
             <Nav className="d-flex justify-content-around">
               <Link className="text-light fs-4" to="/" onClick={logOut}>
                 Log out
+              </Link>
+              <Link className="text-light fs-4" to="/allUsers" >
+                    All Users
               </Link>
             </Nav>
           ) : (
