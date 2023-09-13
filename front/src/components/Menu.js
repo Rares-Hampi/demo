@@ -34,7 +34,7 @@ export default function Menu(props) {
               <Link className="text-light fs-4" to="/" onClick={logOut}>
                 Log out
               </Link>
-              <Link className="text-light fs-4" to="/allUsers" >
+              <Link className="text-light fs-4" to="allUsers" >
                     All Users
               </Link>
             </Nav>
