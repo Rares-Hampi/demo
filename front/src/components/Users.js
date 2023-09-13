@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import axios from 'axios'
+import Menu from "./Menu";
 
 function Users(){
 
@@ -21,6 +22,7 @@ function Users(){
     },[]);
     return(
         <div>
+            <Menu/>
             All Users
             <div>
                 {

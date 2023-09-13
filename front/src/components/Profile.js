@@ -14,7 +14,7 @@ export default function Profile() {
         params: { id: id },
       })
       .then((res) => {
-        setUser({ name: res.data.username, email: res.data.mail });
+        setUser({ name: res.data.username, email: res.data.mail, age: res.data.age, id:res.data._id, about: res.data.about});
       })
       .catch((err) => {
         console.log(err);
@@ -22,6 +22,30 @@ export default function Profile() {
   }, [id]);
 
   console.log(user);
+
+  const setAge = (e,index) =>{
+      user.age=parseFloat(e.target.value)
+      setUser(user);
+  }
+  const setAbout = (e) =>{
+      user.about=e.target.value
+      setUser(user);
+  }
+  const saveProfile = () => {
+    const userDataToUpdate = {
+      age: user.age,
+      about: user.about,
+    };
+
+    axios
+      .post(`http://localhost:5000/user/updateUser/${id}`, userDataToUpdate)
+      .then((res) => {
+        console.log("User profile updated successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
     return (
       <>
@@ -36,14 +60,15 @@ export default function Profile() {
               <Card.Text>
                 {user.email}
               </Card.Text>
-              <Button variant="primary">Go somewhere</Button>
             </Card.Body>
           </Card> 
           
         )}
-          
+        Age: <input type = "number"  onChange={(e) => {setAge(e,user.id)}}/>
+        <br/>
+        About: <textarea  onChange={(e) => {setAbout(e,user.id)}}></textarea>
         </div>
-    
+        <button className='btn btn-success mr-5' onClick={()=>{saveProfile(user,user.id)}} >Save</button>
       </>
     );
 }
